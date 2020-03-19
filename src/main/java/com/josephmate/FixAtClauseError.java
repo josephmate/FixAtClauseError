@@ -23,9 +23,9 @@ public class FixAtClauseError {
 
     private static final class Violation {
         public final String path;
-        public final long lineNumber;
+        public final int lineNumber;
 
-        private Violation(String path, long lineNumber) {
+        private Violation(String path, int lineNumber) {
             this.path = path;
             this.lineNumber = lineNumber;
         }
@@ -43,7 +43,7 @@ public class FixAtClauseError {
             List<Violation> violationsToProcess =
                     lines.map(regex::matcher)
                          .filter(Matcher::matches)
-                         .map(matcher -> new Violation(matcher.group(1), Long.parseLong(matcher.group(2))))
+                         .map(matcher -> new Violation(matcher.group(1), Integer.parseInt(matcher.group(2))))
                          .collect(Collectors.toList());
 
             // The build file output the violations from top of the file to the bottom of the file
@@ -64,6 +64,13 @@ public class FixAtClauseError {
     private static void processViolation(Violation violation) throws IOException {
         try {
             List<String> lines = Files.readAllLines(FileSystems.getDefault().getPath(violation.path), StandardCharsets.UTF_8);
+
+            // subtract 1 for line numbers being 1 indexed
+            // subtract 1 for going to the previous line
+            String previousLine = lines.get(violation.lineNumber - 2);
+            int firstAsterisk = previousLine.indexOf("*");
+            String emptyCommentLine = previousLine.substring(0, firstAsterisk + 1);
+            lines.add(violation.lineNumber - 1, emptyCommentLine);
 
             try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(violation.path), StandardCharsets.UTF_8)) {
                 for (String line : lines) {
