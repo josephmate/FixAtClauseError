@@ -17,6 +17,10 @@ public class FixAtClauseError {
 
     /**
      * From checkstyle project:
+     * [ERROR] [checkstyle] [ERROR] [filepath]:[lineNumber]: Javadoc at-clause '@return' should be preceded with an empty line. [JavadocParagraph]
+     * \[ERROR\] \[checkstyle\] \[ERROR\] (.*):(\d+): Javadoc at-clause '@\w+' should be preceded with an empty line. \[JavadocParagraph\]
+     *
+     * From checkstyle project:
      * [checkstyle] [ERROR] [filepath]:[lineNumber]: Javadoc at-clause '@param' should be preceded with an empty line. [JavadocParagraph]
      * \[checkstyle\] \[ERROR\] (.*):(\d+): Javadoc at-clause '@\w+' should be preceded with an empty line. \[JavadocParagraph\]
      *
@@ -25,6 +29,7 @@ public class FixAtClauseError {
      * \[ERROR\] (.*):\[(\d+\)] \(javadoc\) JavadocParagraph: Javadoc at-clause '@\w+' should be preceded with an empty line.
      */
     private static final List<Pattern> regexes = Arrays.asList(
+            Pattern.compile("\\[ERROR\\] \\[checkstyle\\] \\[ERROR\\] (.*):(\\d+): Javadoc at-clause '@\\w+' should be preceded with an empty line. \\[JavadocParagraph\\]"),
             Pattern.compile("\\[checkstyle\\] \\[ERROR\\] (.*):(\\d+): Javadoc at-clause '@\\w+' should be preceded with an empty line. \\[JavadocParagraph\\]"),
             Pattern.compile("\\[ERROR\\] (.*):\\[(\\d+)\\] \\(javadoc\\) JavadocParagraph: Javadoc at-clause '@\\w+' should be preceded with an empty line.")
     );
