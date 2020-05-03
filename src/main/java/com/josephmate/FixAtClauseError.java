@@ -25,13 +25,14 @@ public class FixAtClauseError {
      * \[checkstyle\] \[ERROR\] (.*):(\d+): Javadoc at-clause '@\w+' should be preceded with an empty line. \[JavadocParagraph\]
      *
      * From sevntu.checkstyle\sevntu-checks project:
-     * [ERROR] filepath:[lineNumber] (javadoc) JavadocParagraph: Javadoc at-clause '@param' should be preceded with an empty line.
-     * \[ERROR\] (.*):\[(\d+\)] \(javadoc\) JavadocParagraph: Javadoc at-clause '@\w+' should be preceded with an empty line.
+     * [ERROR] filepath:[lineNumber] (javadoc) RequireEmptyLineBeforeAtClauseBlock: Javadoc at-clause '@param' should be preceded with an empty line.
+     * \[ERROR\] (.*):\[(\d+\)] \(javadoc\) RequireEmptyLineBeforeAtClauseBlock: Javadoc at-clause '@\w+' should be preceded with an empty line.
      */
     private static final List<Pattern> regexes = Arrays.asList(
             Pattern.compile("\\[ERROR\\] \\[checkstyle\\] \\[ERROR\\] (.*):(\\d+): Javadoc at-clause '@\\w+' should be preceded with an empty line. \\[JavadocParagraph\\]"),
             Pattern.compile("\\[checkstyle\\] \\[ERROR\\] (.*):(\\d+): Javadoc at-clause '@\\w+' should be preceded with an empty line. \\[JavadocParagraph\\]"),
-            Pattern.compile("\\[ERROR\\] (.*):\\[(\\d+)\\] \\(javadoc\\) JavadocParagraph: Javadoc at-clause '@\\w+' should be preceded with an empty line.")
+            Pattern.compile("\\[ERROR\\] (.*):\\[(\\d+)\\] \\(javadoc\\) JavadocParagraph: Javadoc at-clause '@\\w+' should be preceded with an empty line."),
+            Pattern.compile("\\[ERROR\\] (.*):\\[(\\d+)\\] \\(javadoc\\) RequireEmptyLineBeforeAtClauseBlock: Javadoc at-clause '@\\w+' should be preceded with an empty line.")
     );
 
 
