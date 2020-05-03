@@ -16,23 +16,28 @@ import java.util.stream.Stream;
 public class FixAtClauseError {
 
     /**
-     * From checkstyle project:
-     * [ERROR] [checkstyle] [ERROR] [filepath]:[lineNumber]: Javadoc at-clause '@return' should be preceded with an empty line. [JavadocParagraph]
+     * From https://github.com/checkstyle/checkstyle 8.32 project:
+     * [ERROR] [checkstyle] [ERROR] filepath:lineNumber: Javadoc at-clause '@return' should be preceded with an empty line. [JavadocParagraph]
      * \[ERROR\] \[checkstyle\] \[ERROR\] (.*):(\d+): Javadoc at-clause '@\w+' should be preceded with an empty line. \[JavadocParagraph\]
      *
-     * From checkstyle project:
-     * [checkstyle] [ERROR] [filepath]:[lineNumber]: Javadoc at-clause '@param' should be preceded with an empty line. [JavadocParagraph]
+     * From https://github.com/checkstyle/checkstyle 8.33 project:
+     * [checkstyle] [ERROR] filepath:lineNumber: Javadoc at-clause '@param' should be preceded with an empty line. [JavadocParagraph]
      * \[checkstyle\] \[ERROR\] (.*):(\d+): Javadoc at-clause '@\w+' should be preceded with an empty line. \[JavadocParagraph\]
      *
-     * From sevntu.checkstyle\sevntu-checks project:
+     * From https://github.com/sevntu.checkstyle\sevntu-checks project:
      * [ERROR] filepath:[lineNumber] (javadoc) RequireEmptyLineBeforeAtClauseBlock: Javadoc at-clause '@param' should be preceded with an empty line.
      * \[ERROR\] (.*):\[(\d+\)] \(javadoc\) RequireEmptyLineBeforeAtClauseBlock: Javadoc at-clause '@\w+' should be preceded with an empty line.
+     *
+     * From https://github.com/sevntu-checkstyle/methods-distance
+     * [ERROR] filepath:lineNumber: Javadoc at-clause '@author' should be preceded with an empty line.
+     * \[ERROR\] (.*):(\d+): Javadoc at-clause '@\w+' should be preceded with an empty line. \[RequireEmptyLineBeforeAtClauseBlock\]
      */
     private static final List<Pattern> regexes = Arrays.asList(
             Pattern.compile("\\[ERROR\\] \\[checkstyle\\] \\[ERROR\\] (.*):(\\d+): Javadoc at-clause '@\\w+' should be preceded with an empty line. \\[JavadocParagraph\\]"),
             Pattern.compile("\\[checkstyle\\] \\[ERROR\\] (.*):(\\d+): Javadoc at-clause '@\\w+' should be preceded with an empty line. \\[JavadocParagraph\\]"),
             Pattern.compile("\\[ERROR\\] (.*):\\[(\\d+)\\] \\(javadoc\\) JavadocParagraph: Javadoc at-clause '@\\w+' should be preceded with an empty line."),
-            Pattern.compile("\\[ERROR\\] (.*):\\[(\\d+)\\] \\(javadoc\\) RequireEmptyLineBeforeAtClauseBlock: Javadoc at-clause '@\\w+' should be preceded with an empty line.")
+            Pattern.compile("\\[ERROR\\] (.*):\\[(\\d+)\\] \\(javadoc\\) RequireEmptyLineBeforeAtClauseBlock: Javadoc at-clause '@\\w+' should be preceded with an empty line."),
+            Pattern.compile("\\[ERROR\\] (.*):(\\d+): Javadoc at-clause '@\\w+' should be preceded with an empty line. \\[RequireEmptyLineBeforeAtClauseBlock\\]")
     );
 
 
